@@ -8,10 +8,18 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 
 import { loadBlogPost } from "@/helpers/file-helpers";
 
+export const generateMetadata = async ({ params }) => {
+  const post = await loadBlogPost(params.postSlug);
+
+  return {
+    title: post.frontmatter.title,
+    description: post.frontmatter.abstract,
+  };
+};
+
 async function BlogPost({ params }) {
   const post = await loadBlogPost(params.postSlug);
 
-  console.log("post", post);
   return (
     <article className={styles.wrapper}>
       <BlogHero
