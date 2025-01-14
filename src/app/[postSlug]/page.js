@@ -8,8 +8,13 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 
 import { loadBlogPost } from "@/helpers/file-helpers";
 import CodeSnippet from "@/components/CodeSnippet";
+
 const DivisionGroupsDemo = React.lazy(() =>
   import("@/components/DivisionGroupsDemo")
+);
+
+const CircularColorsDemo = React.lazy(() =>
+  import("@/components/CircularColorsDemo")
 );
 
 export const generateMetadata = async ({ params }) => {
@@ -36,6 +41,7 @@ async function BlogPost({ params }) {
           components={{
             pre: CodeSnippet,
             DivisionGroupsDemo,
+            CircularColorsDemo,
           }}
         />
       </div>
