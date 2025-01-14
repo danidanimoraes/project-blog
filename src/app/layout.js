@@ -10,6 +10,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./styles.css";
 
+import { cookies } from "next/headers";
+
 const mainFont = Work_Sans({
   subsets: ["latin"],
   display: "fallback",
@@ -23,9 +25,10 @@ const monoFont = Spline_Sans_Mono({
   variable: "--font-family-mono",
 });
 
-function RootLayout({ children }) {
+async function RootLayout({ children }) {
   // TODO: Dynamic theme depending on user preference
-  const theme = "light";
+  const cookie = await cookies();
+  const theme = cookie.get("color-theme")?.value ?? "light";
 
   return (
     <html
@@ -36,7 +39,7 @@ function RootLayout({ children }) {
     >
       <body>
         <ReduceMotionWrapper>
-          <Header theme={theme} />
+          <Header initialTheme={theme} />
           <main>{children}</main>
           <Footer />
         </ReduceMotionWrapper>
